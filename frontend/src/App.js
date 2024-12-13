@@ -1,26 +1,19 @@
-import axios from 'axios';
-import { useEffect, useState } from 'react';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import MainPage from './pages/MainPage';
+import ErrorPage from './pages/ErrorPage';
+import LoginPage from './pages/LoginPage';
+
 
 function App() {
-  const [message, setMessage] = useState('');
   
-  
-  useEffect(()=>{
-
-    axios
-    .get('http://localhost:3001/')
-    .then((res) =>{
-      setMessage(res.data)})   
-    .catch(error => console.error('Error in fetching data',error))
-    })
-
-
-  return (
-    <div className='App'>
-      <h1>I am your master!</h1>
-      <div>{message}</div> 
-    </div>
-  )
+  return(
+    <Router>
+      <Routes>
+        <Route path='/' element={<MainPage/>}/>
+        <Route path='*' element={<ErrorPage/>}/>
+        <Route path='/login' element={<LoginPage/>}/>
+      </Routes>
+    </Router>);
 }
 
 export default App;
