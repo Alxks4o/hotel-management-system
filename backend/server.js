@@ -1,10 +1,16 @@
 const express = require('express'); //fetches the express package 
 const cors = require('cors');
+const connectDB = require('./config/db')
+require('dotenv').config()
 const app = express(); //app holds express
 
-const PORT = 3001
+const authRoutes = require('./routes/authRouter')
 
-app.use(cors())
+connectDB(); //calling the connectDB function to connect to db
+app.use(cors());
+const PORT = process.env.PORT||3001;
+
+
 
 app.get('/',(req,res) =>{
     res.send('Hey there');
